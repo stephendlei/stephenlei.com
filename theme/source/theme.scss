@@ -3,7 +3,11 @@
 @import '_variables';
 @import '_mixins';
 
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+* {
+	box-sizing: border-box;
+}
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, article, blockquote, pre,
 a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var, b, u, i, center,
 dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
@@ -19,15 +23,19 @@ body {
 	font-family: 'Raleway', sans-serif;
 	font-size: 16px;
 	margin: 0;
+	min-width: 320px;
+	@include mq(xsmall) {
+		font-size: 14px;
+	}
 }
 
 h1 {
-	font-size: 5.625em;
+	font-size: 3.75em;
 	font-weight: 300;
 }
 
 h2 {
-	font-size: 3.75em;
+	font-size: 2.5em;
 	font-weight: 700;
 }
 
@@ -41,40 +49,63 @@ header {
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 850px;
-	background: url("../images/background_banner_sm.jpg") no-repeat;
-	background-size: 2500px auto;
+	height: 570px;
+	background: url("../images/background_banner_lg.jpg") no-repeat;
+	background-size: 1680px auto;
 	background-position: center bottom;
 	z-index: 0;
+	@include mq(medium) {
+		background: url("../images/background_banner_med.jpg") no-repeat;
+		background-size: 1080px auto;
+		background-position: center bottom;
+		height: 514px;
+	}
+	@include mq(xsmall-small) {
+		background: url("../images/background_banner_sm.jpg") no-repeat;
+		background-size: 840px auto;
+		background-position: center bottom;
+		height: 458px;
+	}
+	@include mq(xsmall) {
+		height: 425px;
+	}
 	&:before {
 		content:'';
 		position: absolute;
 		width: 100%;
-		height: 67%;
+		height: 380px;
 		background: #3f6577;
 		opacity: 0.6;
-
+		@include mq(medium) {
+			height: 324px;
+		}
+		@include mq(xsmall-small) {
+			height: 268px;
+		}
+		@include mq(xsmall) {
+			height: 235px;
+		}
+	
 	}
 	.overlay {
 		position: relative;
 		float: right;
-		height: 570px;
+		height: 380px;
 		width: calc(50% + 500px);
 		overflow: hidden;
-		/* &:before {
-			content:'';
-			position: absolute;
-			top: 14%;
-			left: 14%;
-			height: 130%;
-			width: 65%;
-			transform: rotate(32deg);
-			@include box-shadow(-10px,0,4px,-2px, rgba(0,0,0,0.35));
-		} */
+		@include mq(medium) {
+			height: 324px;
+		}
+		@include mq(xsmall-small) {
+			height: 268px;
+		}
+		@include mq(xsmall) {
+			height: 235px;
+		}
 		&:after {
 			content:'';
 			position: absolute;
-			top: calc(-25vw + 100px);
+			top: calc(-25vw + 80px);
 			left: 280px;
 			display: block;
 			height: calc(60vw + 500px);
@@ -94,7 +125,25 @@ header {
 			height: 0;
 			width: 65%;
 		} */
-		
+	}
+	.hero {
+		position: absolute;
+		left: 0;
+		right: 0;
+		text-align: center;
+		bottom: 14em;
+		min-width: 320px;
+		@include mq(xsmall) {
+			bottom: 16em;
+		}
+		h1 {
+			color: #ffffff;
+			margin: 0;
+		}
+		h2 {
+			color: $accent-text-color;
+			margin: 0;
+		}
 	}
 }
 
@@ -102,38 +151,34 @@ main {
 	position: relative;
 }
 
-.hero {
-	margin-top: 21em;
-	margin-bottom: 3.625em;
-	text-align: center;	
-	h1 {
-		color: #ffffff;
-		margin: 0;
-	}
-	h2 {
-		color: $accent-text-color;
-		margin: 0;
-	}
-}
-
 .band {
 	position: relative;
 	text-align: center;
 	background: rgba(255,255,255,0.5);
 	width: 100%;
-	height: 280px;
+	height: 190px;
+	margin-top: 23.75em;
 	@include box-shadow(0,4px,4px,4px,rgba(0,0,0,0.35));
+	@include mq(medium) {
+		margin-top: 20.25em;
+	}
+	@include mq(xsmall-small) {
+		margin-top: 16.75em;
+	}
 	.slogan {
 		padding-top: 6.5em;
-		font-size: 1.875em;
+		font-size: 1.25em;
 		font-weight: 300;
 		color: $alt-text-color;
+		@include mq(xsmall) {
+			padding-top: 7.5em;
+		}
 	}
 }
 
 .profile {
 	position: absolute;
-	top: -40px;
+	top: -27px;
 	left: 0;
 	right: 0;
 	text-align: center;
@@ -141,9 +186,12 @@ main {
 	.hex-wrapper {
 		display: inline-block;
 		min-width: 225px;
-		&:hover .outer-hex {
-			margin: 0 4em;
-			transition: all 0.3s ease-out;
+		&:hover .hex-med {
+			margin: 0 5em;
+			@include transition(all 0.2s ease-out);
+			@include mq(xsmall) {
+				margin: 0 10vw;
+			}
 		}
 		.hex {
 			position: relative;
@@ -159,6 +207,7 @@ main {
 				border-style: solid;
 			}
 			&:before {
+
 				right: 100%;
 				border-color: transparent currentColor transparent transparent;
 			}
@@ -171,8 +220,6 @@ main {
 		.outer-hex {
 			display: inline-block;
 			vertical-align: middle;
-			margin: 0 -3em;
-			transition: all 0.2s ease-in;
 		}
 		.inner-hex {
 			position: absolute;
@@ -196,6 +243,7 @@ main {
 					position: absolute;
 					top: 0;
 					left: -50%;
+					height: 100%;
 				}
 			}
 		}
@@ -203,31 +251,42 @@ main {
 			height: $hex_height_med;
 			width: calc(#{$hex_height_med} * 0.5772);
 			z-index: 600;
-			&:before { border-width: calc(#{$hex_height_med} / 2) calc(#{$hex_height_med} / 4) calc(#{$hex_height_med} / 2) 0; }
-			&:after { border-width: calc(#{$hex_height_med} / 2) 0 calc(#{$hex_height_med} / 2) calc(#{$hex_height_med} / 4); }
+			@include transition(all 0.1s ease-in);
+			&:before { border-width: calc(#{$hex_height_med} / 2) calc((#{$hex_height_med} / 2) / 1.732) calc(#{$hex_height_med} / 2) 0; }
+			&:after { border-width: calc(#{$hex_height_med} / 2) 0 calc(#{$hex_height_med} / 2) calc((#{$hex_height_med} / 2) / 1.732); }
 			.inner-hex {
 				height: $hex_height_med - 12px;
 				width: calc(#{$hex_height_med - 12px} * 0.5772);
 				top: 6px;
 				left: 3px;
-				&:before { border-width: calc(#{$hex_height_med - 12px} / 2) calc(#{$hex_height_med - 12px} / 4) calc(#{$hex_height_med - 12px} / 2) 0;	}
-				&:after { border-width: calc(#{$hex_height_med - 12px} / 2) 0 calc(#{$hex_height_med - 12px} / 2) calc(#{$hex_height_med - 12px} / 4); }
+				&:before { border-width: calc(#{$hex_height_med - 12px} / 2) calc((#{$hex_height_med - 12px} / 2) / 1.732) calc(#{$hex_height_med - 12px} / 2) 0;	}
+				&:after { border-width: calc(#{$hex_height_med - 12px} / 2) 0 calc(#{$hex_height_med - 12px} / 2) calc((#{$hex_height_med - 12px} / 2) / 1.732); }
 			}
 		}
-
 		.hex-left, .hex-right {
 			img {
 				position: absolute;
-				top: calc(50% - #{$hex_height_med}/3);
-				left: calc(50% - #{$hex_height_med}/3);
-				width: calc(#{$hex_height_med} / 1.5);
+				top: calc(50% - #{$hex_height_med}/3.2);
+				left: calc(50% - #{$hex_height_med}/3.2);
+				width: calc(#{$hex_height_med} / 1.6);
 				height: auto;
 				z-index: 500;
 			}
 		}
-
-		.hex-right img {
-			color: $accent-text-color;
+		.hex-left {
+			margin-right:-3em;
+			@include mq(xsmall) {
+				margin-right: 10vw;
+			}
+		}
+		.hex-right{
+			margin-left: -3em;
+			@include mq(xsmall) {
+				margin-left: 10vw;
+			}
+			img {
+				color: $accent-text-color;
+			}
 		}
 	}
 }
@@ -235,12 +294,16 @@ main {
 
 
 article {
-	max-width: 1220px;
+	max-width: 960px;
 	margin: 0 auto;
 	padding: 0 3em;
+	@include mq(xsmall) {
+		padding: 0 2em;
+	}
 	.about {
-		font-size: 3em;
+		font-size: 2em;
 		color: $text-color;
+		padding: 0.5em 0;
 		p {
 			margin: 0.25em 0;
 		}
@@ -248,5 +311,38 @@ article {
 }
 
 footer {
-
+	width: 100%;
+	padding: 1em 0;
+	background-color: $alt-background-color;
+	overflow:hidden;
+	@include mq(xsmall) {
+		font-size: 1.125em;
+	}
+	.wrapper {
+		position: relative;
+		max-width: 960px;
+		margin: 0 auto;
+		padding: 0 3em;
+		text-align: center;
+		.email {
+			float: right;
+			z-index: 100;
+			color: $text-color;
+			@include mq(xsmall-medium) {
+				float: none;
+				margin-bottom: 0.25em;
+			}
+		}
+		.copyright {
+			position: absolute;
+			top: 0;
+			left: calc(50% - 62px);
+			color: lighten($alt-background-color, 15);
+			@include no-select;
+			@include mq(xsmall-medium) {
+				position: static;
+			}
+		}
+		
+	}
 }
